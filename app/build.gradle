@@ -48,4 +48,7 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.5.0'
     // custom dialog plugin
     implementation 'com.github.droidbyme:DroidDialog:1d3d30d4ef'
+    //Qr Code Generator
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 }

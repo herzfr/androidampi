@@ -21,18 +21,13 @@ import android.widget.Toast;
 import com.ampi.registrasi.service.SQLiteHelper;
 import com.ampi.registrasi.utility.Utilitas;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Base64;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
 
@@ -65,10 +60,14 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
 
     private void savetoFireStore() {
         noReg = Utilitas.generateRandom();
+
+        String imageVal = image == null ? "" : image;
+        String jabatanval = jabatan == null ? "" : jabatan;
+
         Map<String, Object> user = new HashMap<>();
         user.put("nama", nama);
-        user.put("jabatan", jabatan);
-        user.put("image", image);
+        user.put("jabatan", jabatanval);
+        user.put("image", imageVal);
         user.put("status", false);
 
         db.collection("tamu").document(noReg)

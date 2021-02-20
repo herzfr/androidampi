@@ -3,6 +3,8 @@ package com.ampi.registrasi.service;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,14 @@ import android.widget.TextView;
 
 import com.ampi.registrasi.R;
 import com.ampi.registrasi.model.Anggota;
+import com.ampi.registrasi.utility.Utilitas;
 
 import java.util.ArrayList;
 
 public class AnggotaAdapter extends BaseAdapter {
 
     private Context context;
-    private  int layout;
+    private int layout;
     private ArrayList<Anggota> anggotaList;
 
 
@@ -43,9 +46,9 @@ public class AnggotaAdapter extends BaseAdapter {
         return position;
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         ImageView imageAnggota;
-        TextView nameAnggota, noAnggota, statusAnggota;
+        TextView nameAnggota, noAnggota, statusAnggota, jabatanAnggota;
     }
 
     @Override
@@ -54,29 +57,40 @@ public class AnggotaAdapter extends BaseAdapter {
         View row = convertView;
         ViewHolder holder = new ViewHolder();
 
-        if(row == null){
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
 
-            holder.nameAnggota = (TextView) row.findViewById(R.id.nameAnggota);
-            holder.noAnggota = (TextView) row.findViewById(R.id.noAnggota);
-            holder.statusAnggota = (TextView) row.findViewById(R.id.statusAnggota);
-            holder.imageAnggota = (ImageView) row.findViewById(R.id.imageAnggota);
+            holder.noAnggota = row.findViewById(R.id.noAnggota);
+            holder.nameAnggota = row.findViewById(R.id.nameAnggota);
+            holder.jabatanAnggota = row.findViewById(R.id.jabatanAnggota);
+            holder.statusAnggota = row.findViewById(R.id.statusAnggota);
+            holder.imageAnggota = row.findViewById(R.id.imageAnggota);
             row.setTag(holder);
-        }
-        else {
+
+
+        } else {
             holder = (ViewHolder) row.getTag();
         }
 
         Anggota agt = anggotaList.get(position);
+        String statusKehadiran = agt.getStatus().equalsIgnoreCase("false") ? "Belum Hadir" : "Hadir";
 
-        holder.nameAnggota.setText(agt.getName());
         holder.noAnggota.setText(agt.getNoreg());
-        holder.statusAnggota.setText(agt.getStatus());
+        holder.nameAnggota.setText(agt.getName());
+        holder.jabatanAnggota.setText(agt.getJabatan());
+        holder.statusAnggota.setText(statusKehadiran);
+        row.setOnClickListener(v -> {
+            Log.e("ADAPTER", "getView: clicked : " + agt.getNoreg());
+//            Utilitas.showCustomDialog(context, "Title", "Anda Menekan ID : " + agt.getNoreg(), "OK");
+            Utilitas.showQrCustomDialog(context, agt.getNoreg());
 
-        byte[] foodImage = agt.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
-        holder.imageAnggota.setImageBitmap(bitmap);
+        });
+
+        byte[] anggotaImage = Base64.decode(agt.getImage(), Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(anggotaImage, 0, anggotaImage.length);
+        holder.imageAnggota.setImageBitmap(decodedImage);
+
 
         return row;
 

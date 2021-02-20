@@ -3,14 +3,14 @@
     android:id="@+id/mainContainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="5dp" >
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:gravity="center"
         android:minWidth="130dp"
         android:orientation="vertical">
@@ -24,20 +24,28 @@
             android:src="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/nameAnggota"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="asdasdas asdasdasdsa asd " />
-
-        <TextView
             android:id="@+id/noAnggota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="123456"/>
+            android:text="No anggota" />
+
+        <TextView
+            android:id="@+id/nameAnggota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Nama Anggota " />
+
+        <TextView
+            android:id="@+id/jabatanAnggota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Jabatan Anggota " />
 
         <TextView
             android:id="@+id/statusAnggota"
@@ -45,9 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="UNCHECK"/>
+            android:text="UNCHECK" />
     </LinearLayout>
-
 
 
 </RelativeLayout>

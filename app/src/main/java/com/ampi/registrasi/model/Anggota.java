@@ -1,22 +1,22 @@
 package com.ampi.registrasi.model;
 
-import java.util.Arrays;
-
 public class Anggota {
 
     private int id;
     private String name;
     private String noreg;
-    private byte[] image;
+    private String image;
     private String status;
+    private String jabatan;
     private int time;
 
-    public Anggota(int id, String name, String noreg, byte[] image, String status, int time) {
+    public Anggota(int id, String name, String noreg, String image, String status, String jabatan, int time) {
         this.id = id;
         this.name = name;
         this.noreg = noreg;
         this.image = image;
         this.status = status;
+        this.jabatan = jabatan;
         this.time = time;
     }
 
@@ -47,11 +47,11 @@ public class Anggota {
         this.noreg = noreg;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -77,9 +77,17 @@ public class Anggota {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", noreg='" + noreg + '\'' +
-                ", image=" + Arrays.toString(image) +
+                ", image=" + image +
                 ", status='" + status + '\'' +
                 ", time=" + time +
                 '}';
+    }
+
+    public String getJabatan() {
+        return jabatan;
+    }
+
+    public void setJabatan(String jabatan) {
+        this.jabatan = jabatan;
     }
 }
