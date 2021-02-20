@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrasi = findViewById(R.id.btnRegistrasi);
 
         btnRegistrasi.setOnClickListener(this);
+        btnList.setOnClickListener(this);
+        btnScan.setOnClickListener(this);
 
     }
 
@@ -35,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnRegistrasi:
                 startActivity(new Intent(this, InputActivity.class));
+                break;
+            case R.id.btnList:
+                startActivity(new Intent(this, AnggotaList.class));
+                break;
+            case R.id.btnScan:
+                startActivity(new Intent(this, ScannerActivity.class));
                 break;
             default:
                 break;
