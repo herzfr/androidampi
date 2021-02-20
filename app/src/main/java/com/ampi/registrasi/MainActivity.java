@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView textView;
-    private Button btnScan , btnList, btnRegistrasi;
+    private Button btnScan, btnList, btnRegistrasi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         textView = findViewById(R.id.txtView);
         btnScan = findViewById(R.id.btnScan);
         btnList = findViewById(R.id.btnList);
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrasi.setOnClickListener(this);
         btnList.setOnClickListener(this);
         btnScan.setOnClickListener(this);
-
     }
 
     @Override
@@ -48,4 +47,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 }

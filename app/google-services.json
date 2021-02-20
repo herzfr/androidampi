@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "285254692117",
+    "project_id": "ampiproject",
+    "storage_bucket": "ampiproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285254692117:android:cc06f162714694c5b7cd1c",
+        "android_client_info": {
+          "package_name": "com.ampi.registrasi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285254692117-8q5p1r1h0bi74jkcd3851mmif4s017t3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ampi.registrasi",
+            "certificate_hash": "e04088f8f47affe42fe62506a41c03ed1d08920f"
+          }
+        },
+        {
+          "client_id": "285254692117-rejt29ltpllr42db8cldcm78lj35eti5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCesd3jtSvcJaLQQxvmIdg0W1uAqubn740"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285254692117-rejt29ltpllr42db8cldcm78lj35eti5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

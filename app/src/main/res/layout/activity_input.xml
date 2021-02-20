@@ -23,24 +23,23 @@
             android:textColor="#2E2C2C"
             />
 
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/etlReg"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            app:hintTextColor="#2C2C2C"-->
+<!--            android:focusable="true"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:hint="No Registrasi">-->
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etlReg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:hintTextColor="#2C2C2C"
-            android:focusable="true"
-            android:layout_margin="10dp"
-            android:hint="No Registrasi">
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/noReg"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColorHint="#2C2C2C"/>-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/noReg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="#2C2C2C"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etlName"
@@ -54,6 +53,24 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/namaAnggota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#2C2C2C"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etlJabatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:hintTextColor="#2C2C2C"
+            android:focusable="true"
+            android:layout_margin="10dp"
+            android:hint="Jabatan Anggota">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/jabatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#2C2C2C"/>
