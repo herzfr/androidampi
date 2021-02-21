@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="INPUT REGISTRASI"
             android:textSize="20dp"
-            android:textColor="#2E2C2C"
+            android:textColor="@color/basicblue"
             />
 
 <!--        <com.google.android.material.textfield.TextInputLayout-->
@@ -46,16 +46,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:hintTextColor="#2C2C2C"
             android:focusable="true"
             android:layout_margin="10dp"
+            android:textAllCaps="true"
+            app:boxStrokeColor="#FFC107"
+            app:hintTextColor="@color/basicblue"
             android:hint="Nama Anggota">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/namaAnggota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#2C2C2C"/>
+                android:textAllCaps="true"
+                android:textColorHint="#FFC107"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,16 +67,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:hintTextColor="#2C2C2C"
             android:focusable="true"
             android:layout_margin="10dp"
+            android:textAllCaps="true"
+            app:hintTextColor="@color/basicblue"
+            app:boxStrokeColor="#FFC107"
             android:hint="Jabatan Anggota">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/jabatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#2C2C2C"/>
+                android:textAllCaps="true"
+                android:textColorHint="#FFC107"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,13 +95,13 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_margin="20dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/user_upload" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnUpload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#2196F3"
+                android:background="@drawable/btn_menu_scanner"
                 android:text="Upload"
                 android:layout_marginHorizontal="20dp"
                 android:layout_gravity="center"
@@ -108,9 +114,9 @@
             android:id="@+id/btnReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/basicblue"
             android:layout_marginHorizontal="20dp"
-            android:background="#2196F3"
+            android:background="@drawable/btn_menu_effect2"
             android:text="Registrasi"
             />
 
@@ -118,12 +124,25 @@
             android:id="@+id/btnList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/basicblue"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
-            android:background="#2196F3"
+            android:background="@drawable/btn_menu_effect2"
             android:text="List"
             />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/basicYellow"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/btn_menu_effect"
+            android:drawableTop="@drawable/ic_back"
+            android:paddingTop="20dp"
+            android:drawableTint="@color/basicYellow"/>
+
 
 
 

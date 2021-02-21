@@ -12,11 +12,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.ampi.registrasi.R;
 import com.ampi.registrasi.model.Anggota;
 import com.ampi.registrasi.utility.Utilitas;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AnggotaAdapter extends BaseAdapter {
 
@@ -30,6 +33,7 @@ public class AnggotaAdapter extends BaseAdapter {
         this.layout = layout;
         this.anggotaList = anggotaList;
     }
+
 
     @Override
     public int getCount() {
@@ -77,22 +81,32 @@ public class AnggotaAdapter extends BaseAdapter {
         String statusKehadiran = agt.getStatus().equalsIgnoreCase("false") ? "Belum Hadir" : "Hadir";
 
         holder.noAnggota.setText(agt.getNoreg());
+        holder.noAnggota.setVisibility(View.GONE);
+
         holder.nameAnggota.setText(agt.getName());
         holder.jabatanAnggota.setText(agt.getJabatan());
         holder.statusAnggota.setText(statusKehadiran);
+        if (agt.getStatus().equals("true")) {
+            holder.statusAnggota.setBackgroundResource(R.drawable.textview_style);
+        } else {
+            holder.statusAnggota.setBackgroundResource(R.drawable.textview2_style);
+        }
         row.setOnClickListener(v -> {
             Log.e("ADAPTER", "getView: clicked : " + agt.getNoreg());
 //            Utilitas.showCustomDialog(context, "Title", "Anda Menekan ID : " + agt.getNoreg(), "OK");
-            Utilitas.showQrCustomDialog(context, agt.getNoreg());
-
+            Utilitas.showQrCustomDialog(context, agt.getNoreg(), agt.getName());
         });
 
         byte[] anggotaImage = Base64.decode(agt.getImage(), Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(anggotaImage, 0, anggotaImage.length);
         holder.imageAnggota.setImageBitmap(decodedImage);
+        holder.imageAnggota.setClipToOutline(true);
 
 
         return row;
 
     }
+
+
+
 }

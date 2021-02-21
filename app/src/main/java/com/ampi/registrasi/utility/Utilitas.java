@@ -6,15 +6,31 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.ampi.registrasi.R;
+import com.ampi.registrasi.model.Anggota;
 import com.droidbyme.dialoglib.DroidDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -23,10 +39,18 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Utilitas {
+
+
+    final private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private volatile Bundle controlBundle;
 
     public static byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
@@ -93,18 +117,37 @@ public class Utilitas {
                 .show();
     }
 
+    public static int showCustomSuccess(Context context, String title, String message, String btnTxt) {
+        new DroidDialog.Builder(context)
+                .icon(R.drawable.ic_action_tick)
+                .title(title)
+                .content(message)
+                .cancelable(true, false)
+                .positiveButton(btnTxt, dialog -> {
+                    dialog.dismiss();
+                })
+                .show();
+        return 0;
+    }
+
+
     //show qr custom dialog
-    public static void showQrCustomDialog(Context context, String noReg) {
+    public static void showQrCustomDialog(Context context, String noReg, String name) {
 
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.custom_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         ImageView image = dialog.findViewById(R.id.iv_icon);
         image.setImageResource(R.mipmap.ic_launcher);
         image.setImageBitmap(generateQrCode(noReg));
 
+        TextView textView = dialog.findViewById(R.id.tv_nama);
+        textView.setText(name);
+
         Button okButton = dialog.findViewById(R.id.bt_ok);
         Button shareBtn = dialog.findViewById(R.id.bt_Share);
+        Button deleteBtn = dialog.findViewById(R.id.bt_Delete);
 
         okButton.setOnClickListener(v -> {
             Log.e("DIALOG", "showQrCustomDialog: ");
@@ -113,8 +156,33 @@ public class Utilitas {
         shareBtn.setOnClickListener(v -> {
             shareQR(context, noReg);
         });
+
+        deleteBtn.setOnClickListener(v -> {
+            Log.e("DIALOG", "showQrCustomDialog: Delete");
+            db.collection("tamu").document(noReg)
+                    .delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("TAG", "DocumentSnapshot successfully deleted!");
+//                            showCustomDialog(context, "Data Sudah di Hapus", "Data Tamu Di Hapus dengan ID : " + noReg, "Tutup");
+                            int ret = showCustomSuccess(context, "Data Sudah di Hapus", "Data Tamu Di Hapus dengan ID : " + noReg, "Tutup");
+                            if (ret == 0) {
+                                dialog.dismiss();
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("TAG", "Error deleting document", e);
+                        }
+                    });
+        });
         dialog.show();
     }
+
+
 
     public static void shareQR(Context context, String noReg) {
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(),
@@ -142,4 +210,90 @@ public class Utilitas {
         }
     }
 
+    //show qr custom dialog
+    public static void updateAll(Context context) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.custom_dialog_list);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+        Button okButton = dialog.findViewById(R.id.bt_ok);
+        Button noButton = dialog.findViewById(R.id.bt_no);
+
+
+        okButton.setOnClickListener(v -> {
+            Log.e("DIALOG", "update: ");
+//            dialog.dismiss();
+            db.collection("tamu").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        ArrayList<String> list = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            list.add(document.getId());
+                        }
+                        Log.d("TAG", list.toString());
+                        updateDatas(context, list); // *** new ***
+                    } else {
+                        Log.d("TAG", "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+        });
+        noButton.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+    public static void updateDatas(Context context, ArrayList list) {
+        for (int k = 0; k < list.size(); k++) {
+            db.collection("tamu").document(list.get(k).toString())
+                    .update("status", false).addOnSuccessListener(new OnSuccessListener<Void>()
+            {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.i("Update", "Value Updated");
+
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(context, "Error In Updating Details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    static void updateData(ArrayList list) {
+//        Map<String, Object> user = new HashMap<>();
+//        user.put("status", true);
+
+        // Get a new write batch
+        WriteBatch batch = db.batch();
+
+        // Iterate through the list
+        for (int k = 0; k < list.size(); k++) {
+
+            // Update each list item
+            Log.e("TAG", "updateData: => " + list.get(k) );
+//            list.get(k);
+            DocumentReference ref = db.collection("tamu").document(list.get(k).toString());
+            batch.update(ref, "status", false);
+            
+        }
+
+        // Commit the batch
+        batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                // Yay its all done in one go!
+                Log.e("TAG", "onComplete: " + task );
+            }
+        });
+
+    }
 }

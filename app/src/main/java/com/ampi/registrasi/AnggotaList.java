@@ -2,15 +2,25 @@ package com.ampi.registrasi;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.ampi.registrasi.model.Anggota;
 import com.ampi.registrasi.service.AnggotaAdapter;
 import com.ampi.registrasi.utility.ConstantValue;
+import com.ampi.registrasi.utility.Utilitas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,12 +31,16 @@ import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 
-public class AnggotaList extends AppCompatActivity {
+public class AnggotaList extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     GridView gridView;
     ArrayList<Anggota> list;
     AnggotaAdapter anggotaAdapter = null;
     FirebaseFirestore db;
+    private SwipeRefreshLayout swipeContainer;
+    private LinearLayout parentPanelLL;
+    private SearchView searchName;
+    private Button btnRefreshTamu;
     String TAG = "AnggotaList";
 
     @Override
@@ -40,9 +54,66 @@ public class AnggotaList extends AppCompatActivity {
         gridView.setAdapter(anggotaAdapter);
 
         anggotaAdapter.notifyDataSetChanged();
-
         initFirebase();
+
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setEnabled(false);
+
+
+        searchName = findViewById(R.id.searchName);
+        searchName.setOnQueryTextListener(this);
+
+        btnRefreshTamu = findViewById(R.id.btnRefreshTamu);
+        btnRefreshTamu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utilitas.updateAll(v.getContext());
+            }
+        });
+
+
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                try {
+//                    anggotaAdapter.notifyDataSetChanged();
+//                    swipeContainer.setRefreshing(false);
+//                }
+//                catch(NullPointerException e){
+//                    list.clear();
+//                    initFirebase();
+//                    anggotaAdapter = new AnggotaAdapter(getApplicationContext(), R.layout.button_image_layout, list);
+//                    gridView.setAdapter(anggotaAdapter);
+//                    anggotaAdapter.notifyDataSetChanged();
+//                    swipeContainer.setRefreshing(false);
+//                }
+//
+//            }
+//        });
+
+        parentPanelLL = findViewById(R.id.parentPanelLL);
+
+
+
+//        swipeContainer.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged() {
+//                Log.e(TAG, "onScrollChanged: " + parentPanelLL.getScaleY() );
+//                if (parentPanelLL.getScrollY() == 1.0) {
+//                    swipeContainer.setEnabled(true);
+//                } else {
+//                    swipeContainer.setEnabled(false);
+//                }
+//            }
+//        });
     }
+
+    private void initSearch(){
+
+    }
+
+
+
 
 
     private void initFirebase() {
@@ -78,5 +149,20 @@ public class AnggotaList extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Log.e(TAG, "onQueryTextSubmit: " + query );
+//        DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+//        Query query = mFirebaseDatabaseReference.child("userTasks").orderByChild("title").equalTo("#Yahoo");
+//        query.addValueEventListener(valueEventListener);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        Log.e(TAG, "onQueryTextSubmit: " + newText );
+        return false;
     }
 }

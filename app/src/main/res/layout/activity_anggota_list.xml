@@ -1,21 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLL"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AnggotaList">
 
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llSearch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:columnWidth="120dp"
-        android:gravity="center"
-        android:numColumns="auto_fit"
+        android:background="@color/basicblue">
+
+        <SearchView
+            android:id="@+id/searchName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginTop="341dp"
+            android:background="@drawable/search_style"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:queryHint="Search your item.."
+            android:textColor="@color/basicYellow"
+            android:textColorHint="@color/basicYellow"
+            app:defaultQueryHint="Select locality" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llbtn"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llSearch">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRefreshTamu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/basicblue"
+            android:background="@drawable/btn_menu_effect4"
+            android:text="Kembali Semula"/>
+
+    </LinearLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llbtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/parentPanelLL"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:columnWidth="0dp"
+            android:gravity="center"
+            android:numColumns="2"
+            android:padding="5dp" />
+
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

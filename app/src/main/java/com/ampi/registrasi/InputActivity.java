@@ -35,7 +35,7 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
 
     private String TAG = "InputActivity";
 
-    private Button btnList, btnReg, btnUpload;
+    private Button btnList, btnReg, btnUpload, btnBack;
     private ImageView imgAvatar;
     private TextInputEditText inputReg, inputName, inputJabatan;
     private Utilitas utilitas;
@@ -89,6 +89,7 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
         btnList = findViewById(R.id.btnList);
         btnReg = findViewById(R.id.btnReg);
         btnUpload = findViewById(R.id.btnUpload);
+        btnBack = findViewById(R.id.btnBack);
         imgAvatar = findViewById(R.id.imgAvatar);
         inputName = findViewById(R.id.namaAnggota);
         inputJabatan = findViewById(R.id.jabatan);
@@ -96,6 +97,7 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
         btnList.setOnClickListener(this);
         btnReg.setOnClickListener(this);
         btnUpload.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
     }
 
     @Override
@@ -112,6 +114,9 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnList:
                 Log.e(TAG, "onClick: LIST");
                 toListActivity();
+            case R.id.btnBack:
+                Log.e(TAG, "onClick: Back");
+                toBack();
                 break;
         }
     }
@@ -186,6 +191,10 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
     private void toListActivity() {
         Intent intent = new Intent(InputActivity.this, AnggotaList.class);
         startActivity(intent);
+    }
+
+    private void toBack(){
+        finish();
     }
 
 

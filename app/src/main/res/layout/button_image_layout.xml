@@ -3,13 +3,17 @@
     android:id="@+id/mainContainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="5dp">
+    android:background="@android:color/transparent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:minWidth="130dp"
@@ -17,17 +21,19 @@
 
         <ImageView
             android:id="@+id/imageAnggota"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/ic_launcher_foreground"
+            android:background="@drawable/imageview_style"/>
 
         <TextView
             android:id="@+id/noAnggota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="?attr/colorPrimary"
             android:gravity="center"
             android:text="No anggota" />
 
@@ -36,7 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="?attr/colorPrimary"
             android:gravity="center"
+            android:textSize="13sp"
             android:text="Nama Anggota " />
 
         <TextView
@@ -44,7 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="?attr/colorPrimary"
             android:gravity="center"
+            android:textSize="10sp"
             android:text="Jabatan Anggota " />
 
         <TextView
@@ -53,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:background="@drawable/textview_style"
+            android:textColor="#fff"
             android:text="UNCHECK" />
     </LinearLayout>
 

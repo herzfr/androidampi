@@ -124,8 +124,8 @@ public class ScannerActivity extends AppCompatActivity implements View.OnClickLi
         Map<String, Object> user = new HashMap<>();
         user.put("status", true);
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("capital", true);
+//        Map<String, Object> data = new HashMap<>();
+//        data.put("capital", true);
 
         db.collection("tamu").document(noReg)
                 .set(user, SetOptions.merge())
