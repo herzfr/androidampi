@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.ampi.registrasi.MainActivity;
 import com.ampi.registrasi.R;
+import com.ampi.registrasi.ScannerActivity;
 import com.ampi.registrasi.model.Anggota;
 import com.droidbyme.dialoglib.DroidDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -234,7 +236,30 @@ public class Utilitas {
                             list.add(document.getId());
                         }
                         Log.d("TAG", list.toString());
-                        updateDatas(context, list); // *** new ***
+//                        updateDatas(context, list, dialog); // *** new ***
+                        for (int k = 0; k < list.size(); k++) {
+                            db.collection("tamu").document(list.get(k).toString())
+                                    .update("status", false).addOnSuccessListener(new OnSuccessListener<Void>()
+                            {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.i("Update", "Value Updated");
+                                    Toast.makeText(context, "Data Update", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                    context.startActivity(new Intent(context, MainActivity.class));
+//                                    showCustomSuccess(context, "Data Sudah di Update", "Data Kembali Seperti Semula ", "Tutup");
+//                                    if (ret == 0) {
+//                                        dialog.dismiss();
+//                                    }
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(Exception e) {
+                                            Toast.makeText(context, "Error In Updating Details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
                     } else {
                         Log.d("TAG", "Error getting documents: ", task.getException());
                     }
@@ -248,7 +273,7 @@ public class Utilitas {
         dialog.show();
     }
 
-    public static void updateDatas(Context context, ArrayList list) {
+    public static void updateDatas(Context context, ArrayList list, Dialog dialog) {
         for (int k = 0; k < list.size(); k++) {
             db.collection("tamu").document(list.get(k).toString())
                     .update("status", false).addOnSuccessListener(new OnSuccessListener<Void>()
@@ -256,7 +281,11 @@ public class Utilitas {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Log.i("Update", "Value Updated");
-
+                    Toast.makeText(context, "Value Updated: " + aVoid, Toast.LENGTH_SHORT).show();
+                    showCustomDialog(context, "Data Sudah di Update", "Data Kembali Seperti Semula ", "Tutup");
+//                    if (ret == 0) {
+//                        dialog.dismiss();
+//                    }
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
