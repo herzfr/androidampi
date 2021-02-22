@@ -48,7 +48,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:focusable="true"
             android:layout_margin="10dp"
-            android:textAllCaps="true"
             app:boxStrokeColor="#FFC107"
             app:hintTextColor="@color/basicblue"
             android:hint="Nama Anggota">
@@ -57,7 +56,6 @@
                 android:id="@+id/namaAnggota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
                 android:textColorHint="#FFC107"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +67,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:focusable="true"
             android:layout_margin="10dp"
-            android:textAllCaps="true"
             app:hintTextColor="@color/basicblue"
             app:boxStrokeColor="#FFC107"
             android:hint="Jabatan Anggota">
@@ -78,7 +75,6 @@
                 android:id="@+id/jabatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
                 android:textColorHint="#FFC107"/>
 
         </com.google.android.material.textfield.TextInputLayout>

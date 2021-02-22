@@ -143,4 +143,5 @@ public class ScannerActivity extends AppCompatActivity implements View.OnClickLi
         imageAnggota.setImageBitmap(Utilitas.base64toBitmap(ConstantValue.defaultImage));
     }
 
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -12,8 +13,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,10 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -156,7 +163,7 @@ public class Utilitas {
             dialog.dismiss();
         });
         shareBtn.setOnClickListener(v -> {
-            shareQR(context, noReg);
+            shareQR(context, noReg, name);
         });
 
         deleteBtn.setOnClickListener(v -> {
@@ -186,14 +193,14 @@ public class Utilitas {
 
 
 
-    public static void shareQR(Context context, String noReg) {
+    public static void shareQR(Context context, String noReg, String name) {
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                generateQrCode(noReg), "Design", null);
+                generateQrCode(noReg), name, null);
         Uri uri = Uri.parse(path);
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("image/*");
         share.putExtra(Intent.EXTRA_STREAM, uri);
-        share.putExtra(Intent.EXTRA_TEXT, "Undangan Tamu");
+        share.putExtra(Intent.EXTRA_TEXT, name);
         context.startActivity(Intent.createChooser(share, "Bagi Undangan"));
     }
 
@@ -246,7 +253,11 @@ public class Utilitas {
                                     Log.i("Update", "Value Updated");
                                     Toast.makeText(context, "Data Update", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
-                                    context.startActivity(new Intent(context, MainActivity.class));
+                                    Intent i=new Intent(context, MainActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
+
+
 //                                    showCustomSuccess(context, "Data Sudah di Update", "Data Kembali Seperti Semula ", "Tutup");
 //                                    if (ret == 0) {
 //                                        dialog.dismiss();
@@ -272,6 +283,7 @@ public class Utilitas {
 
         dialog.show();
     }
+
 
     public static void updateDatas(Context context, ArrayList list, Dialog dialog) {
         for (int k = 0; k < list.size(); k++) {
@@ -324,5 +336,26 @@ public class Utilitas {
             }
         });
 
+    }
+
+
+    private static void saveImage(Context context, LinearLayout llsave) throws IOException {
+        LinearLayout content = llsave;
+        content.setDrawingCacheEnabled(true);
+        Bitmap bitmap = content.getDrawingCache();
+        File file, f = null;
+        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+        {
+            file =new File(android.os.Environment.getExternalStorageDirectory(),"TTImages_cache");
+            if(!file.exists())
+            {
+                file.mkdirs();
+
+            }
+            f = new File(file.getAbsolutePath()+file.separator+ "filename"+".png");
+        }
+        FileOutputStream ostream = new FileOutputStream(f);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 10, ostream);
+        ostream.close();
     }
 }

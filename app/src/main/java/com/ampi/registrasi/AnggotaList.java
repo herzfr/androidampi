@@ -165,4 +165,7 @@ public class AnggotaList extends AppCompatActivity implements SearchView.OnQuery
         Log.e(TAG, "onQueryTextSubmit: " + newText );
         return false;
     }
+
+
+
 }

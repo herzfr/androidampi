@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -94,6 +95,9 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
         inputName = findViewById(R.id.namaAnggota);
         inputJabatan = findViewById(R.id.jabatan);
 
+        inputName.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        inputJabatan.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+
         btnList.setOnClickListener(this);
         btnReg.setOnClickListener(this);
         btnUpload.setOnClickListener(this);
@@ -167,8 +171,8 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
 
     private void postRegistration() {
         try {
-            nama = inputName.getText().toString().trim();
-            jabatan = inputJabatan.getText().toString().trim();
+            nama = inputName.getText().toString().trim().toUpperCase();
+            jabatan = inputJabatan.getText().toString().trim().toUpperCase();
 
             if (nama.isEmpty()) {
                 //jika nama tamu belum di masukan
@@ -179,7 +183,7 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
                 savetoFireStore();
                 inputName.setText("");
                 inputJabatan.setText("");
-                imgAvatar.setImageResource(R.mipmap.ic_launcher);
+                imgAvatar.setImageResource(R.drawable.user_upload);
             }
 
             Toast.makeText(getApplicationContext(), "Added successfully!", Toast.LENGTH_SHORT).show();
@@ -192,6 +196,8 @@ public class InputActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(InputActivity.this, AnggotaList.class);
         startActivity(intent);
     }
+
+
 
     private void toBack(){
         finish();

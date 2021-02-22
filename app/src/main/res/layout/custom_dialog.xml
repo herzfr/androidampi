@@ -77,10 +77,10 @@
                 android:background="@drawable/btn_menu_scanner"
                 android:drawableTop="@drawable/ic_share_qr"
                 android:drawableTint="@color/basicYellow"
-                android:paddingTop="20dp" />>
-
+                android:paddingTop="20dp" />
 
         </LinearLayout>
+
 
     </LinearLayout>
 
