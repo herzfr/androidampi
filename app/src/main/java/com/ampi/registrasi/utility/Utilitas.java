@@ -173,7 +173,7 @@ public class Utilitas {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                            Log.e("TAG", "DocumentSnapshot successfully deleted!");
 //                            showCustomDialog(context, "Data Sudah di Hapus", "Data Tamu Di Hapus dengan ID : " + noReg, "Tutup");
                             int ret = showCustomSuccess(context, "Data Sudah di Hapus", "Data Tamu Di Hapus dengan ID : " + noReg, "Tutup");
                             if (ret == 0) {
@@ -184,7 +184,7 @@ public class Utilitas {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w("TAG", "Error deleting document", e);
+                            Log.e("TAG", "Error deleting document", e);
                         }
                     });
         });
@@ -234,46 +234,43 @@ public class Utilitas {
         okButton.setOnClickListener(v -> {
             Log.e("DIALOG", "update: ");
 //            dialog.dismiss();
-            db.collection("tamu").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        ArrayList<String> list = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            list.add(document.getId());
-                        }
-                        Log.d("TAG", list.toString());
+            db.collection("tamu").get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        list.add(document.getId());
+                    }
+                    Log.d("TAG", list.toString());
 //                        updateDatas(context, list, dialog); // *** new ***
-                        for (int k = 0; k < list.size(); k++) {
-                            db.collection("tamu").document(list.get(k).toString())
-                                    .update("status", false).addOnSuccessListener(new OnSuccessListener<Void>()
-                            {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.i("Update", "Value Updated");
-                                    Toast.makeText(context, "Data Update", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                    Intent i=new Intent(context, MainActivity.class);
-                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    context.startActivity(i);
+                    for (int k = 0; k < list.size(); k++) {
+                        db.collection("tamu").document(list.get(k).toString())
+                                .update("status", false).addOnSuccessListener(new OnSuccessListener<Void>()
+                        {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.i("Update", "Value Updated");
+                                Toast.makeText(context, "Data Update", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent i=new Intent(context, MainActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                context.startActivity(i);
 
 
 //                                    showCustomSuccess(context, "Data Sudah di Update", "Data Kembali Seperti Semula ", "Tutup");
 //                                    if (ret == 0) {
 //                                        dialog.dismiss();
 //                                    }
-                                }
-                            })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(Exception e) {
-                                            Toast.makeText(context, "Error In Updating Details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }
-                    } else {
-                        Log.d("TAG", "Error getting documents: ", task.getException());
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        Toast.makeText(context, "Error In Updating Details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
                 }
             });
         });

@@ -12,21 +12,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ampi.registrasi.R;
 import com.ampi.registrasi.model.Anggota;
 import com.ampi.registrasi.utility.Utilitas;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class AnggotaAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
     private ArrayList<Anggota> anggotaList;
-
 
     public AnggotaAdapter(Context context, int layout, ArrayList<Anggota> anggotaList) {
         this.context = context;

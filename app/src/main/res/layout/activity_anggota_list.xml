@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLL"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AnggotaList">
@@ -29,23 +29,23 @@
             android:queryHint="Search your item.."
             android:textColor="@color/basicYellow"
             android:textColorHint="@color/basicYellow"
-            app:defaultQueryHint="Select locality" />
+            app:defaultQueryHint="Cari Berdasarkan Nama" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llbtn"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llSearch">
+        android:layout_below="@+id/llSearch"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRefreshTamu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/basicblue"
             android:background="@drawable/btn_menu_effect4"
-            android:text="Kembali Semula"/>
+            android:text="Kembali Semula"
+            android:textColor="@color/basicblue" />
 
     </LinearLayout>
 
@@ -60,21 +60,21 @@
 
         <LinearLayout
             android:id="@+id/parentPanelLL"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:baselineAligned="false"
             android:orientation="vertical">
 
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:columnWidth="0dp"
-            android:gravity="center"
-            android:numColumns="2"
-            android:padding="5dp" />
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:columnWidth="0dp"
+                android:gravity="center"
+                android:numColumns="2"
+                android:padding="5dp" />
 
         </LinearLayout>
 
