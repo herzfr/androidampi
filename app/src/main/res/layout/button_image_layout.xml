@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:gravity="center"
             android:text="No anggota" />
 
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:gravity="center"
             android:textSize="13sp"
             android:text="Nama Anggota asdasd asdasd " />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:gravity="center"
             android:layout_weight="1"
             android:ellipsize="none"

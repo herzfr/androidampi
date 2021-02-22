@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="INPUT REGISTRASI"
             android:textSize="20dp"
-            android:textColor="@color/basicblue"
+            android:textColor="?attr/colorAccent"
             />
 
 <!--        <com.google.android.material.textfield.TextInputLayout-->

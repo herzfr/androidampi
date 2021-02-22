@@ -27,9 +27,9 @@
             android:inputType="text"
             android:maxLines="1"
             android:queryHint="Search your item.."
-            android:textColor="@color/basicYellow"
-            android:textColorHint="@color/basicYellow"
-            app:defaultQueryHint="Cari Berdasarkan Nama" />
+            android:textColor="?attr/colorAccent"
+            android:textColorHint="?attr/colorAccent"
+            app:defaultQueryHint="Cari Berdasarkan Nama"/>
     </LinearLayout>
 
     <LinearLayout
@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_menu_effect4"
+            android:layout_marginHorizontal="10dp"
             android:text="Kembali Semula"
             android:textColor="@color/basicblue" />
 

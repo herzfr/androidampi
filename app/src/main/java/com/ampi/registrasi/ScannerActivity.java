@@ -52,7 +52,7 @@ public class ScannerActivity extends AppCompatActivity implements View.OnClickLi
         textName = findViewById(R.id.tvName);
         textJabatan = findViewById(R.id.tvJabatan);
         imageAnggota = findViewById(R.id.imageAnggota);
-        buttonScan.setOnClickListener(this::onClick);
+        buttonScan.setOnClickListener(this);
 
         qrScan = new IntentIntegrator(this);
         db = FirebaseFirestore.getInstance();

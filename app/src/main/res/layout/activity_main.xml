@@ -25,12 +25,12 @@
 
     <TextView
         android:id="@+id/txtView"
-        android:layout_width="198dp"
-        android:layout_height="36dp"
-        android:text="AMPI REGISTRASI"
-        android:textSize="20sp"
-        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="AMPI REGISTRASI"
+        android:textColor="#fff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/ll_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -44,11 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:background="@drawable/mainlinear_style"
+        android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible"
-        android:gravity="center"
-        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/txtView"
         app:layout_constraintTop_toBottomOf="@+id/txtView"
@@ -101,8 +101,6 @@
 
 
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
